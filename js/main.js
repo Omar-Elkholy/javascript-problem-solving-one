@@ -55,14 +55,13 @@ function question3() {
     } else {
 
         // Solution
-        if (!isNaN(x1) && !isNaN(x2) && x1.length > 0 && x2.length > 0) {
-            if (+x1 > +x2) {
-                document.getElementById("output-3").innerHTML = x1;
-            }
-            else {
-                document.getElementById("output-3").innerHTML = x2;
-            }
+        if (+x1 > +x2) {
+            document.getElementById("output-3").innerHTML = x1;
         }
+        else {
+            document.getElementById("output-3").innerHTML = x2;
+        }
+
     }
 }
 
@@ -79,6 +78,8 @@ function question4() {
     if (!isNaN(x) && x.length > 0) {
         if (+x < 0) {
             document.getElementById("output-4").innerHTML = "Negative";
+        } else if (x == 0) {
+            document.getElementById("output-4").innerHTML = "Zero";
         }
         else {
             document.getElementById("output-4").innerHTML = "Positive";
@@ -132,36 +133,6 @@ function question5() {
 }
 
 
-// Second Bad Solution With If Only
-
-
-//     if (!isNaN(x1) && !isNaN(x2) && !isNaN(x3)) {
-//         if (+x1 > +x2 && +x1 > +x3 && +x2 < +x3) {
-//             document.getElementById("output-5").innerHTML = "Max= " + x1 + " Min= " + x2;
-//         }
-//         else if (+x1 > +x2 && +x1 > +x3 && +x3 < +x2) {
-//             document.getElementById("output-5").innerHTML = "Max= " + x1 + " Min= " + x3;
-//         }
-//         else if (+x2 > +x1 && +x2 > +x3 && +x1 < +x3) {
-//             document.getElementById("output-5").innerHTML = "Max= " + x2 + " Min= " + x1;
-//         }
-//         else if (+x2 > +x1 && +x2 > +x3 && +x3 < +x1) {
-//             document.getElementById("output-5").innerHTML = "Max= " + x2 + " Min= " + x3;
-//         }
-//         else if (+x3 > +x1 && +x3 > +x2 && +x1 < +x2) {
-//             document.getElementById("output-5").innerHTML = "Max= " + x3 + " Min= " + x2;
-//         }
-//         else {
-//             document.getElementById("output-5").innerHTML = "Max= " + x3 + " Min= " + x1;
-//         }
-//     } else {
-//         document.getElementById("hint-5-1").innerHTML = "Please Enter A Number";
-//         document.getElementById("hint-5-2").innerHTML = "Please Enter A Number";
-//         document.getElementById("hint-5-3").innerHTML = "Please Enter A Number";
-//     }
-// }
-
-
 
 
 // Question 6
@@ -192,8 +163,7 @@ function question7() {
     document.getElementById("output-7").innerHTML = "";
     document.getElementById("hint-7").innerHTML = "";
 
-    var x = document.getElementById("input-7").value;
-
+    var x = document.getElementById("input-7").value.toLowerCase(); // Handling Capitals
     if (isNaN(x) && x.length == 1) {
         if (x == "a" || x == "e" || x == "o" || x == "i" || x == "u") {
             document.getElementById("output-7").innerHTML = "Vowel";
@@ -277,7 +247,7 @@ function question11() {
 
     var x1 = document.getElementById("input-11-1").value;
     var x2 = document.getElementById("input-11-2").value;
-
+    var y = 1;
 
     // Handling Hint Message
 
@@ -288,7 +258,10 @@ function question11() {
     } else {
 
         // Solution
-        document.getElementById("output-11").innerHTML = (+x1) ** (+x2);
+        for (var i = 1; i <= x2; i++) {
+            y *= +x1;
+        }
+        document.getElementById("output-11").innerHTML = y;
 
     }
 
@@ -344,32 +317,12 @@ function question13() {
 
     var x = document.getElementById("input-13").value;
 
-    if (Number.isInteger(+x) && +x > 0 && +x <= 12) {
-        if (x == 1) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 2) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 28";
-        } else if (x == 3) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 4) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 30";
-        } else if (x == 5) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 6) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 30";
-        } else if (x == 7) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 8) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 9) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 30";
-        } else if (x == 10) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        } else if (x == 11) {
-            document.getElementById("output-13").innerHTML = "Days in Month: 30";
-        } else {
-            document.getElementById("output-13").innerHTML = "Days in Month: 31";
-        }
+    if (x == 1 || x == 3 || x == 5 || x == 7 || x == 8 || x == 10 || x == 12) {
+        document.getElementById("output-13").innerHTML = "Days in Month: 31";
+    } else if (x == 2) {
+        document.getElementById("output-13").innerHTML = "Days in Month: 28";
+    } else if (x == 4 || x == 6 || x == 9 || x == 11) {
+        document.getElementById("output-13").innerHTML = "Days in Month: 30";
     } else {
         document.getElementById("hint-13").innerHTML = "Month Numbers (1 - 12)";
     }
@@ -449,42 +402,19 @@ function question15() {
 
     if (Number.isInteger(+x) && +x > 0 && +x <= 12) {
         switch (+x) {
-            case 1:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
+            
             case 2:
                 document.getElementById("output-15").innerHTML = "Days in Month: 28";
                 break;
-            case 3:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
+
             case 4:
-                document.getElementById("output-15").innerHTML = "Days in Month: 30";
-                break;
-            case 5:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
             case 6:
-                document.getElementById("output-15").innerHTML = "Days in Month: 30";
-                break;
-            case 7:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
-            case 8:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
             case 9:
-                document.getElementById("output-15").innerHTML = "Days in Month: 30";
-                break;
-            case 10:
-                document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
             case 11:
                 document.getElementById("output-15").innerHTML = "Days in Month: 30";
                 break;
-            case 12:
+            default: 
                 document.getElementById("output-15").innerHTML = "Days in Month: 31";
-                break;
         }
     } else {
         document.getElementById("hint-15").innerHTML = "Month Numbers (1 - 12)";
@@ -499,25 +429,19 @@ function question16() {
     document.getElementById("output-16").innerHTML = "";
     document.getElementById("hint-16").innerHTML = "";
 
-    var x = document.getElementById("input-16").value;
+    var x = document.getElementById("input-16").value.toLowerCase();  //Handling Capitals
 
     if (isNaN(x) && x.length == 1) {
         switch (x) {
             case "a":
-                document.getElementById("output-16").innerHTML = "Vowel";
-                break;
             case "e":
-                document.getElementById("output-16").innerHTML = "Vowel";
-                break;
             case "i":
-                document.getElementById("output-16").innerHTML = "Vowel";
-                break;
             case "o":
-                document.getElementById("output-16").innerHTML = "Vowel";
-                break;
             case "u":
+
                 document.getElementById("output-16").innerHTML = "Vowel";
                 break;
+
             default:
                 document.getElementById("output-16").innerHTML = "Constant";
         }
@@ -619,25 +543,27 @@ function question19() {
 // Calculator
 
 var inputLabel = document.getElementById('inputLabel');
-     
+
 function pushBtn(obj) {
-     
+
     var pushed = obj.innerHTML;
-     
+
     if (pushed == '=') {
         // Calculate
         inputLabel.innerHTML = eval(inputLabel.innerHTML);
-        
+
     } else if (pushed == 'AC') {
         // All Clear
         inputLabel.innerHTML = '0';
-         
+
     } else {
         if (inputLabel.innerHTML == '0') {
             inputLabel.innerHTML = pushed;
-             
+
         } else {
-            inputLabel.innerHTML += pushed;   
+            inputLabel.innerHTML += pushed;
         }
     }
 }
+
+
